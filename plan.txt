@@ -1,0 +1,12 @@
+plan Proiect Cercetare:
+
+Interfata va contine 3 imagini cu portrete(tipa din tutorialul de pe youtube). Imaginile acestea sunt pe fundal alb si deja alb-negru.
+Utilizatorul isi alege imaginea din astea 3.
+Apasa pe plusul din dreapta-jos si i se va deschide galeria de unde alege o poza pe care vrea sa o suprapuna(de genul aia cu brazii din tutorial).
+Imaginea pe care o incarca va primi urmatoarele modificari: 
+ - redimensionare la dimensiunea celor 3 imagini
+ - filtrare alb-negru
+ - filtrare contrast mare
+Dupa editare se incearca suprapunerea peste imaginea aleasa intial cu efect de "blending mode"(adica se vad brazii in capul tipei).
+Utilizatorul pozitioneaza cu degetul unde vrea brazii si da save.
+Se salveaza imaginea in galerie.  
