@@ -1,0 +1,13 @@
+Setup: 
+1. Generare cheie RSA (nu se completeaza nimic la ce cere comanda): ssh-keygen -t rsa
+2. Trimis cheie RSA publica lui Andrei iurciuc: fisierul "id_rsa.pub" de .ssh
+3. Clonare repo de pe github : git clone git@github.com:Aiurciuc/Explosere.git
+4. Setare mail: git config --global user.email "MAILUL_DE_PE_GIT_HUB"
+5. Setare username: git config --global user.name "orice username"
+
+Pasi pentru interactiune cu git: 
+1. git status  :verifica starea 
+2. pentru a adauga fisierele pentru commit : git add NUME_FISIER  (Sau -A pentru toate)
+3. git pull  : trage modificarle de pe github (trbuie dat inainte de git push NEAPARAT)
+4. git commit -m "mesaj"  : Commite modificarile local
+5. git push : Commite midificarile locale pe github (trbuie dat dupa git commit)
