@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout layout;
     private ImageView image;
 
+    private  Bitmap selectedBackImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         layout.addView(imageView);
         imageView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                selectedBackImage = imageSlideShow;
                 image.setImageBitmap(imageSlideShow);
             }
         });
@@ -105,9 +107,27 @@ public class MainActivity extends AppCompatActivity {
 
             Bitmap colorImage = BitmapFactory.decodeFile(picturePath);
             Bitmap blackAndWhite = BlackAndWhite.convert(colorImage);
-            image.setImageBitmap(blackAndWhite);
+            Bitmap newBitmap = scaleDown(blackAndWhite, 500, false);
+            Bitmap bleedingImage = BleedingEffect.convert(
+                    scaleDown(selectedBackImage, 500, false),
+                    scaleDown(blackAndWhite, 500, false));
+
+
+            image.setImageBitmap(bleedingImage);
         }
 
+    }
+
+    public static Bitmap scaleDown(Bitmap realImage, float maxImageSize,
+                                   boolean filter) {
+        float ratio =
+                (float) maxImageSize / realImage.getHeight();
+        int width = Math.round((float) ratio * realImage.getWidth());
+        int height = Math.round((float) ratio * realImage.getHeight());
+
+        Bitmap newBitmap = Bitmap.createScaledBitmap(realImage, width,
+                height, filter);
+        return newBitmap;
     }
 
     @Override
