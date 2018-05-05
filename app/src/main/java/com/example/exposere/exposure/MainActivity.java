@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;
@@ -39,6 +40,37 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        LinearLayout layout = findViewById(R.id.linearLayout);
+
+            // prima poza din horiz slideshow
+            ImageView imageView1 = new ImageView(this);
+            imageView1.setId(1);
+            imageView1.setPadding(2, 2, 2, 2);
+            imageView1.setImageBitmap(BitmapFactory.decodeResource(
+                    getResources(), R.drawable.poza1));
+            imageView1.setAdjustViewBounds(true);
+            imageView1.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            layout.addView(imageView1);
+
+        // a doua poza din horiz slideshow
+            ImageView imageView2 = new ImageView(this);
+            imageView2.setId(2);
+            imageView2.setPadding(2, 2, 2, 2);
+            imageView2.setImageBitmap(BitmapFactory.decodeResource(
+                    getResources(), R.drawable.poza2));
+            imageView2.setAdjustViewBounds(true);
+            imageView2.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            layout.addView(imageView2);
+
+        // a treia poza din horiz slideshow
+            ImageView imageView3 = new ImageView(this);
+            imageView3.setId(3);
+            imageView3.setPadding(2, 2, 2, 2);
+            imageView3.setImageBitmap(BitmapFactory.decodeResource(
+                    getResources(), R.drawable.poza3));
+            imageView3.setAdjustViewBounds(true);
+            imageView3.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            layout.addView(imageView3);
 
         FloatingActionButton addPicButton =  findViewById(R.id.addPic);
         if (EasyPermissions.hasPermissions(this, galleryPermissions)) {
