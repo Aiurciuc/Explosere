@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private static int RESULT_LOAD_IMAGE = 1;
     private String[] galleryPermissions = {Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    private LinearLayout layout;
+    private ImageView image;
 
 
     @Override
@@ -37,40 +39,14 @@ public class MainActivity extends AppCompatActivity {
         if (!OpenCVLoader.initDebug()) {
             // Handle initialization error
         }
+        image = findViewById(R.id.imageView);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        layout = findViewById(R.id.linearLayout);
 
-        LinearLayout layout = findViewById(R.id.linearLayout);
-
-            // prima poza din horiz slideshow
-            ImageView imageView1 = new ImageView(this);
-            imageView1.setId(1);
-            imageView1.setPadding(2, 2, 2, 2);
-            imageView1.setImageBitmap(BitmapFactory.decodeResource(
-                    getResources(), R.drawable.poza1));
-            imageView1.setAdjustViewBounds(true);
-            imageView1.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            layout.addView(imageView1);
-
-        // a doua poza din horiz slideshow
-            ImageView imageView2 = new ImageView(this);
-            imageView2.setId(2);
-            imageView2.setPadding(2, 2, 2, 2);
-            imageView2.setImageBitmap(BitmapFactory.decodeResource(
-                    getResources(), R.drawable.poza2));
-            imageView2.setAdjustViewBounds(true);
-            imageView2.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            layout.addView(imageView2);
-
-        // a treia poza din horiz slideshow
-            ImageView imageView3 = new ImageView(this);
-            imageView3.setId(3);
-            imageView3.setPadding(2, 2, 2, 2);
-            imageView3.setImageBitmap(BitmapFactory.decodeResource(
-                    getResources(), R.drawable.poza3));
-            imageView3.setAdjustViewBounds(true);
-            imageView3.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            layout.addView(imageView3);
+        this.displayPhoto(R.drawable.poza1);
+        this.displayPhoto(R.drawable.poza2);
+        this.displayPhoto(R.drawable.poza3);
 
         FloatingActionButton addPicButton =  findViewById(R.id.addPic);
         if (EasyPermissions.hasPermissions(this, galleryPermissions)) {
@@ -94,6 +70,22 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void displayPhoto(int photoName){
+        ImageView imageView = new ImageView(this);
+        imageView.setPadding(2, 2, 2, 2);
+        final Bitmap imageSlideShow = BitmapFactory.decodeResource(
+                getResources(), photoName);
+        imageView.setImageBitmap(imageSlideShow);
+        imageView.setAdjustViewBounds(true);
+        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        layout.addView(imageView);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                image.setImageBitmap(imageSlideShow);
+            }
+        });
+    }
+
     //Load image
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -111,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
 
-            ImageView image = findViewById(R.id.imageView);
             Bitmap colorImage = BitmapFactory.decodeFile(picturePath);
             Bitmap blackAndWhite = BlackAndWhite.convert(colorImage);
             image.setImageBitmap(blackAndWhite);
