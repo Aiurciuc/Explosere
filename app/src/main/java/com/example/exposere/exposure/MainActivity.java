@@ -1,6 +1,5 @@
 package com.example.exposere.exposure;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -17,7 +16,6 @@ import android.widget.ImageView;
 public class MainActivity extends AppCompatActivity {
 
     private ImageView selectedImage;
-    private Bitmap currentImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
             Uri photoUri = data.getData();
             if (photoUri != null) {
                 try {
-                    currentImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoUri);
-                    selectedImage.setImageBitmap(currentImage);
+                    Bitmap captureBmp = MediaStore.Images.Media.getBitmap(this.getContentResolver(),photoUri );
+                    selectedImage.setImageBitmap(captureBmp);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
