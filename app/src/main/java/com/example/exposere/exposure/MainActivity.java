@@ -3,6 +3,7 @@ package com.example.exposere.exposure;
 import android.Manifest;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +16,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import org.opencv.android.BaseLoaderCallback;
+import org.opencv.android.LoaderCallbackInterface;
+import org.opencv.android.OpenCVLoader;
+
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,10 +28,14 @@ public class MainActivity extends AppCompatActivity {
     private String[] galleryPermissions = {Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (!OpenCVLoader.initDebug()) {
+            // Handle initialization error
+        }
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -38,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
             EasyPermissions.requestPermissions(this, "Access for storage",
                     101, galleryPermissions);
         }
+
+
         addPicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,7 +80,9 @@ public class MainActivity extends AppCompatActivity {
             cursor.close();
 
             ImageView image = findViewById(R.id.imageView);
-            image.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+            Bitmap colorImage = BitmapFactory.decodeFile(picturePath);
+            Bitmap blackAndWhite = BlackAndWhite.convert(colorImage);
+            image.setImageBitmap(blackAndWhite);
         }
 
     }
