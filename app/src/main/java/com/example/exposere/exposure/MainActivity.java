@@ -107,10 +107,10 @@ public class MainActivity extends AppCompatActivity {
 
             Bitmap colorImage = BitmapFactory.decodeFile(picturePath);
             Bitmap blackAndWhite = BlackAndWhite.convert(colorImage);
-            Bitmap newBitmap = scaleDown(blackAndWhite, 500, false);
+
             Bitmap bleedingImage = BleedingEffect.convert(
-                    scaleDown(selectedBackImage, 500, false),
-                    scaleDown(blackAndWhite, 500, false));
+                    scaleDown(selectedBackImage, Math.min(selectedBackImage.getHeight(),blackAndWhite.getHeight()), false),
+                    scaleDown(blackAndWhite, Math.min(selectedBackImage.getHeight(),blackAndWhite.getHeight()), false));
 
 
             image.setImageBitmap(bleedingImage);
@@ -120,8 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static Bitmap scaleDown(Bitmap realImage, float maxImageSize,
                                    boolean filter) {
-        float ratio =
-                (float) maxImageSize / realImage.getHeight();
+        float ratio = maxImageSize / realImage.getHeight();
         int width = Math.round((float) ratio * realImage.getWidth());
         int height = Math.round((float) ratio * realImage.getHeight());
 
