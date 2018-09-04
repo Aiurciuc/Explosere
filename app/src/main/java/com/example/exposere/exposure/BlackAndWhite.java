@@ -16,7 +16,6 @@ public class BlackAndWhite {
         Mat tmp = new Mat(image.getWidth(), image.getHeight(), CvType.CV_8UC1);
         Utils.bitmapToMat(image, tmp);
         Imgproc.cvtColor(tmp, tmp, Imgproc.COLOR_RGB2GRAY);
-        //there could be some processing
         Imgproc.cvtColor(tmp, tmp, Imgproc.COLOR_GRAY2RGB, 4);
         Utils.matToBitmap(tmp, image);
         return image;

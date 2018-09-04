@@ -11,7 +11,7 @@ import org.opencv.core.Mat;
 
 /**
  * mareste luminozitatea imaginii, creste contrastul
- * Created by Alexandra on 05-May-18.
+ * Created by Alexandra on 21-Aug-18.
  */
 
 public class LightContrast {
@@ -24,7 +24,7 @@ public class LightContrast {
         // create output bitmap
         Bitmap bmOut = Bitmap.createBitmap(width, height, image.getConfig());
         // color information
-        int A, R, G, B;
+        int R, G, B;
         int pixel;
 
         // scan through all pixels
@@ -34,7 +34,6 @@ public class LightContrast {
             {
                 // get pixel color
                 pixel = image.getPixel(x, y);
-                A = Color.alpha(pixel);
                 R = Color.red(pixel);
                 G = Color.green(pixel);
                 B = Color.blue(pixel);
@@ -68,7 +67,7 @@ public class LightContrast {
                 }
 
                 // apply new pixel color to output bitmap
-                bmOut.setPixel(x, y, Color.argb(A, R, G, B));
+                bmOut.setPixel(x, y, Color.rgb(R, G, B));
             }
         }
 

@@ -1,8 +1,6 @@
 package com.example.exposere.exposure;
 
 import android.graphics.Bitmap;
-import android.support.annotation.NonNull;
-
 import org.opencv.android.Utils;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
@@ -11,12 +9,7 @@ import org.opencv.core.Range;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 
 import static org.opencv.core.Core.absdiff;
 import static org.opencv.core.Core.addWeighted;

@@ -106,13 +106,12 @@ public class MainActivity extends AppCompatActivity {
             cursor.close();
 
             Bitmap colorImage = BitmapFactory.decodeFile(picturePath);
-            Bitmap blackAndWhite = BlackAndWhite.convert(colorImage);
-            Bitmap brightness = LightContrast.doBrightness(blackAndWhite, -50);
+            Bitmap brightness = LightContrast.doBrightness(colorImage, -50);
+            Bitmap blackAndWhite = BlackAndWhite.convert(brightness);
 
-            Bitmap newBitmap = scaleDown(brightness, 500, false);
             Bitmap bleedingImage = BleedingEffect.convert(
-                    scaleDown(selectedBackImage, Math.min(selectedBackImage.getHeight(),brightness.getHeight()), false),
-                    scaleDown(brightness, Math.min(selectedBackImage.getHeight(),brightness.getHeight()), false));
+                    scaleDown(selectedBackImage, Math.min(selectedBackImage.getHeight(),blackAndWhite.getHeight()), false),
+                    scaleDown(blackAndWhite, Math.min(selectedBackImage.getHeight(),blackAndWhite.getHeight()), false));
 
 
             image.setImageBitmap(bleedingImage);
